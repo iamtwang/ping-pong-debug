@@ -1,42 +1,31 @@
 package com.pingpongdebug.rest.configs;
 
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
-
-import java.net.URI;
 
 @Configuration
 public class Configs {
 
     @Bean("RestTemplate")
     public RestTemplate restTemplate(){
+        /**
+         * This one use @see org.springframework.http.client.SimpleClientHttpRequestFactory
+         * <code>
+         *     prepareConnection
+         *
+         *     boolean mayWrite =
+         * 				("POST".equals(httpMethod) || "PUT".equals(httpMethod) ||
+         * 						"PATCH".equals(httpMethod) || "DELETE".equals(httpMethod));
+         *
+         * 		connection.setDoOutput(mayWrite);
+         *
+         * </code>
+         * So client will get 400.
+         * [{"timestamp":"2021-10-09T21:43:50.729+00:00","status":400,"error":"Bad Request","path":"/data/info"}]
+         */
         RestTemplate template = new RestTemplate();
-        template.setRequestFactory(new HttpComponentsClientHttpRequestWithBodyFactory());
         return template;
     }
 
-    private static final class HttpComponentsClientHttpRequestWithBodyFactory extends HttpComponentsClientHttpRequestFactory {
-        @Override
-        protected HttpUriRequest createHttpUriRequest(HttpMethod httpMethod, URI uri) {
-            if (httpMethod == HttpMethod.GET) {
-                return new HttpGetRequestWithEntity(uri);
-            }
-            return super.createHttpUriRequest(httpMethod, uri);
-        }
-    }
-    private static final class HttpGetRequestWithEntity extends HttpEntityEnclosingRequestBase {
-        public HttpGetRequestWithEntity(final URI uri) {
-            super.setURI(uri);
-        }
-
-        @Override
-        public String getMethod() {
-            return HttpMethod.GET.name();
-        }
-    }
 }
