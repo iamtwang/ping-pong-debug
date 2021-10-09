@@ -1,7 +1,11 @@
 ## HttpGet With Request Body & RestTemplate
+- Can Http Get has Request Body
+  - Yes
+- Does RestTemplate Default setting support HttpGet with Request body?
+  - No
 - Third party REST API offered HTTP GET endpoint and expect Request Body.
 - In Spring Boot, RestTemplate do not send request boy for GET by default.
-- Use Apache HttpClient to instead of RestTemplate default.
+- Use Apache HttpClient for HttpGet with request body.
 
 ### The work
 - create a Rest Endpoint /data/info to mock the 3rd party API
