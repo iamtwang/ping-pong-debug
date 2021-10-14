@@ -29,6 +29,7 @@ public class Configs {
             return super.createHttpUriRequest(httpMethod, uri);
         }
     }
+    /** HttpGet extends HttpRequestBase */
     private static final class HttpGetRequestWithEntity extends HttpEntityEnclosingRequestBase {
         public HttpGetRequestWithEntity(final URI uri) {
             super.setURI(uri);

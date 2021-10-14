@@ -1,6 +1,7 @@
 package com.pingpongdebug.rest.controller;
 
 import com.pingpongdebug.rest.domain.InfoRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +19,16 @@ public class HelloController {
     @Resource(name = "RestTemplate")
     private RestTemplate restTemplate;
 
+    @Value("${external.endpoint}")
+    private String externalEndpoint;
+
     @GetMapping("/hello/{name}")
     public String getInfo(@PathVariable String name){
 
         HttpEntity entity = nameToInfoReq.andThen(infoRequestHttpEntity).apply(name);
         /** calling external API */
         ResponseEntity<String> info =
-                restTemplate.exchange("http://localhost:1919/data/info", HttpMethod.GET, entity,String.class);
+                restTemplate.exchange(externalEndpoint, HttpMethod.GET, entity,String.class);
         return info.getBody();
     }
 
