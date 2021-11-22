@@ -17,4 +17,10 @@ public class DataController {
         return "Get: "+ request.toString();
     }
 
+    @GetMapping("/version")
+    public String getVersion(){
+
+        return "Done ";
+    }
+
 }
