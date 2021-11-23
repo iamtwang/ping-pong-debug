@@ -14,7 +14,8 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.pingpongdebug.doudizhu.game.constant.CardConst.TOTAL_NUM;
+import static com.pingpongdebug.doudizhu.game.constant.CardConst.TOTAL_CARDS;
+import static com.pingpongdebug.doudizhu.game.constant.CardConst.TOTOAL_PLAYER;
 
 public class PlatformManager implements Manager {
 
@@ -54,7 +55,7 @@ public class PlatformManager implements Manager {
         allCards.addAll(CardConst.CARD_POINTS);
         allCards.addAll(CardConst.CARD_JOKER);
 
-        assert (allCards.size() == TOTAL_NUM);
+        assert (allCards.size() == TOTAL_CARDS);
 
         return this;
     }
@@ -74,25 +75,25 @@ public class PlatformManager implements Manager {
     @Override
     public Manager giveCards() {
         LOGGER.info("Give Cards To Players ... ");
-        if (allCards.size() == TOTAL_NUM && getPlayerArr().length > 0) {
+        if (allCards.size() != TOTAL_CARDS || getPlayerArr().length != TOTOAL_PLAYER) {
+            throw new IllegalStateException("incorrect cards or player");
+        }
 
-            int lx = getPlayerArr().length;
+        int lx = getPlayerArr().length;
 //            for (int i = 0; i < allCards.size() - CardConst.BOTTOM_NUM; i++) {
 //                Player player = players[lx++ % players.length];
 //                player.accept(allCards.get(i));
 //            }
 
-            getPlayerArr()[0].accept(Arrays.asList("3", "3", "3", "3", "6","6", "6","6","7", "7", "8","8", "10","10", "10","10","15"));
-            getPlayerArr()[1].accept(Arrays.asList("4","4", "4","4","5", "5","5", "5", "7", "7", "8","8", "9", "9", "9", "9", "15"));
-            getPlayerArr()[2].accept(Arrays.asList("11","11","11", "11", "12","12","12", "12", "13","13", "13", "13", "14","14","14","14","15"));
+        getPlayerArr()[0].accept(Arrays.asList("3", "3", "3", "3", "6", "6", "6", "6", "7", "7", "8", "8", "10", "10", "10", "10", "15"));
+        getPlayerArr()[1].accept(Arrays.asList("4", "4", "4", "4", "5", "5", "5", "5", "7", "7", "8", "8", "9", "9", "9", "9", "15"));
+        getPlayerArr()[2].accept(Arrays.asList("11", "11", "11", "11", "12", "12", "12", "12", "13", "13", "13", "13", "14", "14", "14", "14", "15"));
 
-            //将剩余的牌放入底牌
-            bottomCards.addAll(allCards.subList(allCards.size() - CardConst.BOTTOM_NUM, allCards.size()));
+        //将剩余的牌放入底牌
+        bottomCards.addAll(allCards.subList(allCards.size() - CardConst.BOTTOM_NUM, allCards.size()));
 
-            LOGGER.info("Give Cards To Players ... done . ");
-        } else {
-            throw new IllegalStateException("");
-        }
+        LOGGER.info("Give Cards To Players ... done . ");
+
         return this;
     }
 

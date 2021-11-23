@@ -28,13 +28,12 @@ public class CardApp implements App {
 
         printGameRules();
 
-        //Init Platform, shuffle and register
         PlatformManager manager = (PlatformManager) PlatformManager.build()
                 .playerInit(PlayerFactory.create("AAA"), PlayerFactory.create("BBB"), PlayerFactory.create("CCC"))
+                .cardInit()
+                .shuffle()
+                .giveCards()
                 .register(new PlatformContext());
-
-        //开始发牌
-        manager.cardInit().shuffle().giveCards();
 
         //平台发牌校验
         RuleFactory.create(CardNumRule.class).checkCardNum(manager);
@@ -97,9 +96,7 @@ public class CardApp implements App {
     private void grabDiZhu(PlatformManager manager) throws Exception {
         //随机获取一个玩家
         PlayerModel randomPlayer = manager.getRandomPlayer();
-        //第一个玩家id
         String firstId = randomPlayer.getId();
-        //打印玩家信息
         randomPlayer.print();
         //设置当前玩家标识
         BaseContext.getContext().setCurrId(randomPlayer.getId());
@@ -117,7 +114,6 @@ public class CardApp implements App {
                 if (currPlayer == null) {
                     currPlayer = randomPlayer;
                 }
-                //设置地主标识
                 currPlayer.setDiZhu(true);
                 break;
             } else {
@@ -126,7 +122,7 @@ public class CardApp implements App {
                 if (currPlayer == null) {
                     break;
                 }
-                //打印玩家信息
+
                 currPlayer.print();
                 //设置当前玩家标识
                 BaseContext.getContext().setCurrId(currPlayer.getId());
@@ -149,7 +145,6 @@ public class CardApp implements App {
      */
     private void grabSucc(PlatformManager manager, PlayerModel currPlayer) {
         LOGGER.info("恭喜你，抢地主成功！");
-        LOGGER.info("===========================================================");
         BaseContext.init();
         BaseContext.getContext().setDiZhuId(currPlayer.getId());
         //将底牌给当前玩家
@@ -163,7 +158,7 @@ public class CardApp implements App {
      */
     private void grabFail() throws Exception {
         //抢地主失败
-        System.out.println("！没有人抢地主，是否重启游戏？[yes/no]");
+        LOGGER.error("！没有人抢地主，是否重启游戏？[yes/no]");
         startOrFinished();
     }
 
@@ -174,7 +169,7 @@ public class CardApp implements App {
      */
     private void retryGame() throws Exception {
         //抢地主失败
-        System.out.println("是否再来一局？[yes/no]");
+        LOGGER.info("是否再来一局？[yes/no]");
         startOrFinished();
     }
 

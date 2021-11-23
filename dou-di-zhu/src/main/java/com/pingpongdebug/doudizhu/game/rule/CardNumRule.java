@@ -27,7 +27,7 @@ public class CardNumRule implements Rule {
      */
     public void checkCardNum(PlatformManager manager) {
         List<String> cardContainer = manager.getAllCards();
-        if (cardContainer == null || cardContainer.size() != CardConst.TOTAL_NUM) {
+        if (cardContainer == null || cardContainer.size() != CardConst.TOTAL_CARDS) {
             LOGGER.error("Error, Must be 54 cards");
             System.exit(1);
         }

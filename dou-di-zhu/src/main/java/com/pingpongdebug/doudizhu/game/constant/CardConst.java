@@ -33,7 +33,9 @@ public class CardConst {
     /**
      * ToTal
      */
-    public static final int TOTAL_NUM = 54;
+    public static final int TOTAL_CARDS = 54;
+
+    public static final int TOTOAL_PLAYER = 3;
 
     /**
      * Cards for DiZhu
