@@ -1,12 +1,12 @@
-package com.pingpongdebug.doudizhu.domain.manager;
+package com.pingpongdebug.doudizhu.game.manager;
 
 
 
-import com.pingpongdebug.doudizhu.domain.constant.CardConst;
-import com.pingpongdebug.doudizhu.domain.context.BaseContext;
-import com.pingpongdebug.doudizhu.domain.context.PlatformContext;
-import com.pingpongdebug.doudizhu.domain.player.Player;
-import com.pingpongdebug.doudizhu.domain.player.PlayerModel;
+import com.pingpongdebug.doudizhu.game.constant.CardConst;
+import com.pingpongdebug.doudizhu.game.context.BaseContext;
+import com.pingpongdebug.doudizhu.game.context.PlatformContext;
+import com.pingpongdebug.doudizhu.game.player.Player;
+import com.pingpongdebug.doudizhu.game.player.PlayerModel;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.pingpongdebug.doudizhu.domain.constant.CardConst.TOTAL_NUM;
+import static com.pingpongdebug.doudizhu.game.constant.CardConst.TOTAL_NUM;
 
 public class PlatformManager implements Manager {
 

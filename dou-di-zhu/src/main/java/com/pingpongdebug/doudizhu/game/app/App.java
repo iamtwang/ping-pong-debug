@@ -1,4 +1,4 @@
-package com.pingpongdebug.doudizhu.domain.app;
+package com.pingpongdebug.doudizhu.game.app;
 
 public interface App {
 

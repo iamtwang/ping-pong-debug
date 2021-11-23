@@ -1,4 +1,4 @@
-package com.pingpongdebug.doudizhu.domain.player;
+package com.pingpongdebug.doudizhu.game.player;
 
 
 public class PlayerFactory {

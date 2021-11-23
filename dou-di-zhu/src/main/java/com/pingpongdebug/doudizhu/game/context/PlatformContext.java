@@ -1,7 +1,7 @@
-package com.pingpongdebug.doudizhu.domain.context;
+package com.pingpongdebug.doudizhu.game.context;
 
 
-import com.pingpongdebug.doudizhu.domain.enums.CardTypeEnum;
+import com.pingpongdebug.doudizhu.game.enums.CardTypeEnum;
 
 public class PlatformContext implements Context {
     /**

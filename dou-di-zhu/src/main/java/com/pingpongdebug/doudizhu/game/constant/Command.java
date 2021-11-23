@@ -1,4 +1,4 @@
-package com.pingpongdebug.doudizhu.domain.constant;
+package com.pingpongdebug.doudizhu.game.constant;
 
 public class Command {
     /**
