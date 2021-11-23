@@ -12,6 +12,7 @@ import com.pingpongdebug.doudizhu.game.rule.RuleFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -21,6 +22,9 @@ public class CardApp implements App {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CardApp.class);
 
+    @Value("${game.player.names}")
+    private String[] playerNames;
+
     @Override
     public void start() throws Exception {
 
@@ -29,7 +33,9 @@ public class CardApp implements App {
         printGameRules();
 
         PlatformManager manager = (PlatformManager) PlatformManager.build()
-                .playerInit(PlayerFactory.create("AAA"), PlayerFactory.create("BBB"), PlayerFactory.create("CCC"))
+                .playerInit(PlayerFactory.create(playerNames[0]),
+                            PlayerFactory.create(playerNames[1]),
+                            PlayerFactory.create(playerNames[2]))
                 .cardInit()
                 .shuffle()
                 .giveCards()
@@ -42,10 +48,10 @@ public class CardApp implements App {
         grabDiZhu(manager);
 
         //轮番出牌
-        roundChuPai(manager);
+        roundPlayingCard(manager);
     }
 
-    private void roundChuPai(PlatformManager manager) throws Exception {
+    private void roundPlayingCard(PlatformManager manager) throws Exception {
         //地主玩家开始出牌
         PlayerModel player = manager.getPlayer(BaseContext.getContext().getDiZhuId());
         //设置当前出牌玩家
@@ -57,7 +63,7 @@ public class CardApp implements App {
             Scanner scanner = new Scanner(System.in);
             String cards = scanner.nextLine();
             //出牌
-            if (!currPlayer.chuPai(cards)) {
+            if (!currPlayer.playingCard(cards)) {
                 continue;
             }
             //是否已经出完

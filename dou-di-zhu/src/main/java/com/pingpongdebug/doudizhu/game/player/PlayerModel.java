@@ -84,7 +84,7 @@ public class PlayerModel implements Player {
     }
 
     @Override
-    public boolean chuPai(String cards) {
+    public boolean playingCard(String cards) {
         try {
             //是否pass
             if (StringUtils.isNotBlank(cards) && cards.equalsIgnoreCase(Command.PASS)) {
