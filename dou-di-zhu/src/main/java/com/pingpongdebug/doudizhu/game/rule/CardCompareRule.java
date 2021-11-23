@@ -1,14 +1,14 @@
-package com.pingpongdebug.doudizhu.domain.rule;
+package com.pingpongdebug.doudizhu.game.rule;
 
-import com.pingpongdebug.doudizhu.domain.context.PlatformContext;
-import com.pingpongdebug.doudizhu.domain.enums.CardTypeEnum;
-import com.pingpongdebug.doudizhu.domain.utils.CardUtil;
+import com.pingpongdebug.doudizhu.game.context.PlatformContext;
+import com.pingpongdebug.doudizhu.game.enums.CardTypeEnum;
+import com.pingpongdebug.doudizhu.game.utils.CardUtil;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.pingpongdebug.doudizhu.domain.enums.CardTypeEnum.*;
+import static com.pingpongdebug.doudizhu.game.enums.CardTypeEnum.*;
 
 /**
  * @description: 大小规则 出票校验，玩家模型

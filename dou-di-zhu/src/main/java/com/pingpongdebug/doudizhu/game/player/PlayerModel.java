@@ -1,14 +1,14 @@
-package com.pingpongdebug.doudizhu.domain.player;
+package com.pingpongdebug.doudizhu.game.player;
 
 
-import com.pingpongdebug.doudizhu.domain.constant.Command;
-import com.pingpongdebug.doudizhu.domain.context.BaseContext;
-import com.pingpongdebug.doudizhu.domain.context.PlatformContext;
-import com.pingpongdebug.doudizhu.domain.enums.CardTypeEnum;
-import com.pingpongdebug.doudizhu.domain.rule.CardCompareRule;
-import com.pingpongdebug.doudizhu.domain.rule.CardTypeRule;
-import com.pingpongdebug.doudizhu.domain.rule.RuleFactory;
-import com.pingpongdebug.doudizhu.domain.utils.CardUtil;
+import com.pingpongdebug.doudizhu.game.constant.Command;
+import com.pingpongdebug.doudizhu.game.context.BaseContext;
+import com.pingpongdebug.doudizhu.game.context.PlatformContext;
+import com.pingpongdebug.doudizhu.game.enums.CardTypeEnum;
+import com.pingpongdebug.doudizhu.game.rule.CardCompareRule;
+import com.pingpongdebug.doudizhu.game.rule.CardTypeRule;
+import com.pingpongdebug.doudizhu.game.rule.RuleFactory;
+import com.pingpongdebug.doudizhu.game.utils.CardUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

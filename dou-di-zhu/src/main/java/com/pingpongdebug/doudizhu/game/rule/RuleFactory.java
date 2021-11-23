@@ -1,4 +1,4 @@
-package com.pingpongdebug.doudizhu.domain.rule;
+package com.pingpongdebug.doudizhu.game.rule;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

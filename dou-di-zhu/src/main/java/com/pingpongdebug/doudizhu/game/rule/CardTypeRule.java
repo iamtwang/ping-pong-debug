@@ -1,10 +1,10 @@
-package com.pingpongdebug.doudizhu.domain.rule;
+package com.pingpongdebug.doudizhu.game.rule;
 
 
-import com.pingpongdebug.doudizhu.domain.constant.CardConst;
-import com.pingpongdebug.doudizhu.domain.enums.CardTypeEnum;
-import com.pingpongdebug.doudizhu.domain.player.PlayerModel;
-import com.pingpongdebug.doudizhu.domain.utils.CardUtil;
+import com.pingpongdebug.doudizhu.game.constant.CardConst;
+import com.pingpongdebug.doudizhu.game.enums.CardTypeEnum;
+import com.pingpongdebug.doudizhu.game.player.PlayerModel;
+import com.pingpongdebug.doudizhu.game.utils.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;

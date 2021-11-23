@@ -1,9 +1,9 @@
-package com.pingpongdebug.doudizhu.domain.rule;
+package com.pingpongdebug.doudizhu.game.rule;
 
 
-import com.pingpongdebug.doudizhu.domain.constant.CardConst;
-import com.pingpongdebug.doudizhu.domain.manager.PlatformManager;
-import com.pingpongdebug.doudizhu.domain.player.Player;
+import com.pingpongdebug.doudizhu.game.constant.CardConst;
+import com.pingpongdebug.doudizhu.game.manager.PlatformManager;
+import com.pingpongdebug.doudizhu.game.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

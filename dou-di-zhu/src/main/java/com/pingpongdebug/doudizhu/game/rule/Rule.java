@@ -1,4 +1,4 @@
-package com.pingpongdebug.doudizhu.domain.rule;
+package com.pingpongdebug.doudizhu.game.rule;
 
 /**
  * @description: 规则接口

@@ -1,9 +1,9 @@
-package com.pingpongdebug.doudizhu.domain.manager;
+package com.pingpongdebug.doudizhu.game.manager;
 
 
-import com.pingpongdebug.doudizhu.domain.context.PlatformContext;
-import com.pingpongdebug.doudizhu.domain.player.Player;
-import com.pingpongdebug.doudizhu.domain.player.PlayerModel;
+import com.pingpongdebug.doudizhu.game.context.PlatformContext;
+import com.pingpongdebug.doudizhu.game.player.Player;
+import com.pingpongdebug.doudizhu.game.player.PlayerModel;
 
 public interface Manager {
 

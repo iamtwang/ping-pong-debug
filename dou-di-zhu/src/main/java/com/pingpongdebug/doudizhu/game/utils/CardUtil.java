@@ -1,4 +1,4 @@
-package com.pingpongdebug.doudizhu.domain.utils;
+package com.pingpongdebug.doudizhu.game.utils;
 
 import com.google.common.collect.ImmutableBiMap;
 import org.apache.commons.lang3.StringUtils;

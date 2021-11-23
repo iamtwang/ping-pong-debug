@@ -1,4 +1,4 @@
-package com.pingpongdebug.doudizhu.domain.context;
+package com.pingpongdebug.doudizhu.game.context;
 
 /**
  *

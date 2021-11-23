@@ -1,7 +1,7 @@
 package com.pingpongdebug.doudizhu.component;
 
 
-import com.pingpongdebug.doudizhu.domain.app.CardApp;
+import com.pingpongdebug.doudizhu.game.app.CardApp;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
