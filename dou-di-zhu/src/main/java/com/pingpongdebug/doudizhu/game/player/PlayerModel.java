@@ -141,7 +141,7 @@ public class PlayerModel implements Player {
         context.setPreId(this.getId());
         context.setPreMark(this.getMark());
         context.setPreType(cardTypeEnum);
-        context.setPreGiveCards(cards);
+        context.setPrePlayingCards(cards);
         //除去自己手中已经打出的牌
         List<String> leaveList = CardUtil.convertCards(cards);
         leaveList.forEach(e -> getCardList().remove(e));

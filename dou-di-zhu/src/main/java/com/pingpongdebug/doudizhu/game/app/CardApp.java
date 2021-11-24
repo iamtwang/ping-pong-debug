@@ -91,7 +91,7 @@ public class CardApp implements App {
                     " 下一个玩家 {} [{}]",
                     ContextHolder.getContext().getPreId(),
                     ContextHolder.getContext().getPreMark(),
-                    ContextHolder.getContext().getPreGiveCards(),
+                    ContextHolder.getContext().getPrePlayingCards(),
                     manager.getNextPlayer().getId(),
                     manager.getNextPlayer().getMark());
         }

@@ -32,7 +32,7 @@ public class CardCompareRule implements Rule {
      * @return true:当前牌大
      */
     public boolean compare(PlatformContext context, CardTypeEnum typeEnum, String cards) {
-        String preGiveCards = context.getPreGiveCards();
+        String preGiveCards = context.getPrePlayingCards();
         //转成可比较点数
         List<String> cardList = CardUtil.convertCards(cards);
         List<String> preList = CardUtil.convertCards(preGiveCards);
