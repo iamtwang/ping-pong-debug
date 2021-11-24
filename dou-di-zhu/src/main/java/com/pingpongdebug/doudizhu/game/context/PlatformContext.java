@@ -3,7 +3,7 @@ package com.pingpongdebug.doudizhu.game.context;
 
 import com.pingpongdebug.doudizhu.game.enums.CardTypeEnum;
 
-public class PlatformContext implements Context {
+public class PlatformContext {
     /**
      * 上家标识
      */

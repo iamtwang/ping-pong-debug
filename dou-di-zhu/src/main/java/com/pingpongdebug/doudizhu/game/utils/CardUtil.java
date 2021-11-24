@@ -57,7 +57,7 @@ public class CardUtil {
      * @param cards 打出的牌
      * @return 可比较点数
      */
-    public static List<String> leaveConvert(String cards) {
+    public static List<String> convertCards(String cards) {
         List<String> cardList = Arrays.stream(cards.split(SPACE)).filter(StringUtils::isNotBlank).collect(Collectors.toList());
         return cardInPoint(sort(cardList));
     }

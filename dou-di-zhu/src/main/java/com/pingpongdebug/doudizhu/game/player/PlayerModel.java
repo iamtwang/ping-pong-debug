@@ -2,7 +2,7 @@ package com.pingpongdebug.doudizhu.game.player;
 
 
 import com.pingpongdebug.doudizhu.game.constant.Command;
-import com.pingpongdebug.doudizhu.game.context.BaseContext;
+import com.pingpongdebug.doudizhu.game.context.ContextHolder;
 import com.pingpongdebug.doudizhu.game.context.PlatformContext;
 import com.pingpongdebug.doudizhu.game.enums.CardTypeEnum;
 import com.pingpongdebug.doudizhu.game.rule.CardCompareRule;
@@ -84,7 +84,7 @@ public class PlayerModel implements Player {
     }
 
     @Override
-    public boolean chuPai(String cards) {
+    public boolean playingCard(String cards) {
         try {
             //是否pass
             if (StringUtils.isNotBlank(cards) && cards.equalsIgnoreCase(Command.PASS)) {
@@ -96,7 +96,7 @@ public class PlayerModel implements Player {
                 LOGGER.error("错误：！出牌有误，请检查打出的牌！");
                 return false;
             }
-            PlatformContext context = BaseContext.getContext();
+            PlatformContext context = ContextHolder.getContext();
             //是否第一个出牌
             if (StringUtils.isBlank(context.getPreId()) || this.getId().equalsIgnoreCase(context.getPreId())) {
                 //出牌成功,设置context
@@ -143,7 +143,7 @@ public class PlayerModel implements Player {
         context.setPreType(cardTypeEnum);
         context.setPreGiveCards(cards);
         //除去自己手中已经打出的牌
-        List<String> leaveList = CardUtil.leaveConvert(cards);
+        List<String> leaveList = CardUtil.convertCards(cards);
         leaveList.forEach(e -> getCardList().remove(e));
     }
 

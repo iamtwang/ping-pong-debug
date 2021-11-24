@@ -28,7 +28,7 @@ public interface Player {
      * @param cards 打出的牌
      * @return true:出牌成功
      */
-    boolean chuPai(String cards);
+    boolean playingCard(String cards);
 
     /**
      * 身份标识

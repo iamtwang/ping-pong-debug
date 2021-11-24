@@ -38,7 +38,7 @@ public class CardTypeRule implements Rule {
             return null;
         }
         //转成可比较点数
-        List<String> cardList = CardUtil.leaveConvert(cards);
+        List<String> cardList = CardUtil.convertCards(cards);
         //最多不能超过自己的牌数
         if (cardList.size() > playerModel.getCardList().size()) {
             return null;
