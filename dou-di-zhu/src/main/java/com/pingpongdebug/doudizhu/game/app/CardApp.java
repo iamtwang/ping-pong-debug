@@ -2,7 +2,7 @@ package com.pingpongdebug.doudizhu.game.app;
 
 
 import com.pingpongdebug.doudizhu.game.constant.Command;
-import com.pingpongdebug.doudizhu.game.context.BaseContext;
+import com.pingpongdebug.doudizhu.game.context.ContextHolder;
 import com.pingpongdebug.doudizhu.game.context.PlatformContext;
 import com.pingpongdebug.doudizhu.game.manager.PlatformManager;
 import com.pingpongdebug.doudizhu.game.player.PlayerFactory;
@@ -53,11 +53,11 @@ public class CardApp implements App {
 
     private void roundPlayingCard(PlatformManager manager) throws Exception {
         //地主玩家开始出牌
-        PlayerModel player = manager.getPlayer(BaseContext.getContext().getDiZhuId());
+        PlayerModel player = manager.getPlayer(ContextHolder.getContext().getDiZhuId());
         //设置当前出牌玩家
         PlayerModel currPlayer;
         while (true) {
-            currPlayer = StringUtils.isBlank(BaseContext.getContext().getCurrId()) ? player : manager.getNextPlayer();
+            currPlayer = StringUtils.isBlank(ContextHolder.getContext().getCurrId()) ? player : manager.getNextPlayer();
             //打印提示信息
             printNoticeInfo(manager, currPlayer);
             Scanner scanner = new Scanner(System.in);
@@ -71,7 +71,7 @@ public class CardApp implements App {
                 manager.settle(currPlayer);
                 break;
             }
-            BaseContext.getContext().setCurrId(currPlayer.getId());
+            ContextHolder.getContext().setCurrId(currPlayer.getId());
             //必须放到这里，否则容易清屏多度
             this.cleanConsole();
         }
@@ -80,23 +80,23 @@ public class CardApp implements App {
 
     private void printNoticeInfo(PlatformManager manager, PlayerModel currPlayer) {
         //预获取下一个玩家,重要
-        String currId = BaseContext.getContext().getCurrId();
-        BaseContext.getContext().setCurrId(currPlayer.getId());
+        String currId = ContextHolder.getContext().getCurrId();
+        ContextHolder.getContext().setCurrId(currPlayer.getId());
         LOGGER.info("轮到玩家：{}[{}] 出牌，手牌 {}" ,
                 currPlayer.getId(),  currPlayer.getMark() ,currPlayer.order(currPlayer.getCardList()));
 
         LOGGER.info("提示：要不起请输入命令[pass],否则直接输入要打出的牌，多个请用空格分隔");
-        if (StringUtils.isNotBlank(BaseContext.getContext().getPreId())) {
+        if (StringUtils.isNotBlank(ContextHolder.getContext().getPreId())) {
             LOGGER.info("提示：上一个玩家是 {} [{}]" + " 打出的牌[{}]" +
                     " 下一个玩家 {} [{}]",
-                    BaseContext.getContext().getPreId(),
-                    BaseContext.getContext().getPreMark(),
-                    BaseContext.getContext().getPreGiveCards(),
+                    ContextHolder.getContext().getPreId(),
+                    ContextHolder.getContext().getPreMark(),
+                    ContextHolder.getContext().getPreGiveCards(),
                     manager.getNextPlayer().getId(),
                     manager.getNextPlayer().getMark());
         }
         //设置回去,重要
-        BaseContext.getContext().setCurrId(currId);
+        ContextHolder.getContext().setCurrId(currId);
     }
 
     private void grabDiZhu(PlatformManager manager) throws Exception {
@@ -105,7 +105,7 @@ public class CardApp implements App {
         String firstId = randomPlayer.getId();
         randomPlayer.print();
         //设置当前玩家标识
-        BaseContext.getContext().setCurrId(randomPlayer.getId());
+        ContextHolder.getContext().setCurrId(randomPlayer.getId());
         //设置当前玩家
         PlayerModel currPlayer = null;
         while (true) {
@@ -131,7 +131,7 @@ public class CardApp implements App {
 
                 currPlayer.print();
                 //设置当前玩家标识
-                BaseContext.getContext().setCurrId(currPlayer.getId());
+                ContextHolder.getContext().setCurrId(currPlayer.getId());
             }
         }
 
@@ -151,8 +151,8 @@ public class CardApp implements App {
      */
     private void grabSucc(PlatformManager manager, PlayerModel currPlayer) {
         LOGGER.info("恭喜你，抢地主成功！");
-        BaseContext.init();
-        BaseContext.getContext().setDiZhuId(currPlayer.getId());
+        ContextHolder.init();
+        ContextHolder.getContext().setDiZhuId(currPlayer.getId());
         //将底牌给当前玩家
         currPlayer.getCardList().addAll(manager.getBottomCards());
     }

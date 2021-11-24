@@ -3,7 +3,7 @@ package com.pingpongdebug.doudizhu.game.context;
 /**
  *
  */
-public class BaseContext {
+public class ContextHolder {
 
     public static ThreadLocal<PlatformContext> threadLocal = new ThreadLocal<>();
 

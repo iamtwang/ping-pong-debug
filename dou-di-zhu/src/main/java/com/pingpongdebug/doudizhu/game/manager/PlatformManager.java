@@ -3,7 +3,7 @@ package com.pingpongdebug.doudizhu.game.manager;
 
 
 import com.pingpongdebug.doudizhu.game.constant.CardConst;
-import com.pingpongdebug.doudizhu.game.context.BaseContext;
+import com.pingpongdebug.doudizhu.game.context.ContextHolder;
 import com.pingpongdebug.doudizhu.game.context.PlatformContext;
 import com.pingpongdebug.doudizhu.game.player.Player;
 import com.pingpongdebug.doudizhu.game.player.PlayerModel;
@@ -119,7 +119,7 @@ public class PlatformManager implements Manager {
      */
     @Override
     public Manager register(PlatformContext context) {
-        BaseContext.setContext(context);
+        ContextHolder.setContext(context);
         return this;
     }
 
@@ -161,7 +161,7 @@ public class PlatformManager implements Manager {
     @Override
     public PlayerModel getNextPlayer() {
         //当前玩家id
-        String currId = BaseContext.getContext().getCurrId();
+        String currId = ContextHolder.getContext().getCurrId();
         if (StringUtils.isBlank(currId)) {
             LOGGER.info("!!没有设置当前玩家id,随机获取一个!!");
             return getRandomPlayer();

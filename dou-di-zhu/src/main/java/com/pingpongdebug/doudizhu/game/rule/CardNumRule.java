@@ -28,18 +28,18 @@ public class CardNumRule implements Rule {
     public void checkCardNum(PlatformManager manager) {
         List<String> cardContainer = manager.getAllCards();
         if (cardContainer == null || cardContainer.size() != CardConst.TOTAL_CARDS) {
-            LOGGER.error("Error, Must be 54 cards");
+            LOGGER.error("Error, Must be {} cards", CardConst.TOTAL_CARDS);
             System.exit(1);
         }
         Player[] playerArr = manager.getPlayerArr();
         boolean everyNum = Arrays.stream(playerArr).anyMatch(player -> player.getCardNum() != CardConst.INIT_CARD_NUMBER);
         if (everyNum) {
-            LOGGER.error("Error, Every One has 17 cards");
+            LOGGER.error("Error, Every One has {} cards", CardConst.INIT_CARD_NUMBER);
             System.exit(1);
         }
         List<String> bottom = manager.getBottomCards();
         if (bottom == null || bottom.size() != CardConst.BOTTOM_NUM) {
-            LOGGER.error("Error, 3 cards for DiZhu");
+            LOGGER.error("Error, {} cards for DiZhu", CardConst.BOTTOM_NUM);
             System.exit(1);
         }
     }

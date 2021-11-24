@@ -34,8 +34,8 @@ public class CardCompareRule implements Rule {
     public boolean compare(PlatformContext context, CardTypeEnum typeEnum, String cards) {
         String preGiveCards = context.getPreGiveCards();
         //转成可比较点数
-        List<String> cardList = CardUtil.leaveConvert(cards);
-        List<String> preList = CardUtil.leaveConvert(preGiveCards);
+        List<String> cardList = CardUtil.convertCards(cards);
+        List<String> preList = CardUtil.convertCards(preGiveCards);
         if (typeEnum == KING_BOMB) {
             return true;
         }
