@@ -8,9 +8,6 @@ public interface Player {
 
     void accept(List<String> cardList);
 
-    /**
-     * Show current num of cards
-     */
     int getCardNum();
 
     List<String> getCardList();
@@ -18,7 +15,6 @@ public interface Player {
     String getId();
 
     List<String> order(List<String> cardList);
-
 
     void print();
 

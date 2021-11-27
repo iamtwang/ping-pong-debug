@@ -18,31 +18,17 @@ import java.util.List;
 
 
 
-public class PlayerModel implements Player {
+public class PlayerImpl implements Player {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PlayerModel.class);
-    /**
-     * 是否地主
-     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlayerImpl.class);
+
     private boolean diZhu;
 
-    /**
-     * 玩家标识
-     */
     private String id;
 
-    /**
-     * 玩家持有的牌
-     */
     private List<String> cardList;
 
-    /**
-     * 当前牌的数量
-     */
-    private int cardNum;
-
-
-    public PlayerModel(String id) {
+    public PlayerImpl(String id) {
         this.id = id;
         cardList = new ArrayList<>();
     }
@@ -141,7 +127,7 @@ public class PlayerModel implements Player {
         context.setPreId(this.getId());
         context.setPreMark(this.getMark());
         context.setPreType(cardTypeEnum);
-        context.setPreGiveCards(cards);
+        context.setPrePlayingCards(cards);
         //除去自己手中已经打出的牌
         List<String> leaveList = CardUtil.convertCards(cards);
         leaveList.forEach(e -> getCardList().remove(e));
@@ -150,6 +136,6 @@ public class PlayerModel implements Player {
 
     @Override
     public String toString() {
-        return "玩家：" + getId() + ",纸牌：" + cardList + ",牌数：" + cardNum + ",是否地主：" + diZhu;
+        return "玩家：" + getId() + ",纸牌：" + cardList + ",牌数：" + cardList.size() + ",是否地主：" + diZhu;
     }
 }

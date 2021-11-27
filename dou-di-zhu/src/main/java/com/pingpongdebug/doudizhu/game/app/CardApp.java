@@ -6,7 +6,7 @@ import com.pingpongdebug.doudizhu.game.context.ContextHolder;
 import com.pingpongdebug.doudizhu.game.context.PlatformContext;
 import com.pingpongdebug.doudizhu.game.manager.PlatformManager;
 import com.pingpongdebug.doudizhu.game.player.PlayerFactory;
-import com.pingpongdebug.doudizhu.game.player.PlayerModel;
+import com.pingpongdebug.doudizhu.game.player.PlayerImpl;
 import com.pingpongdebug.doudizhu.game.rule.CardNumRule;
 import com.pingpongdebug.doudizhu.game.rule.RuleFactory;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +41,6 @@ public class CardApp implements App {
                 .giveCards()
                 .register(new PlatformContext());
 
-        //平台发牌校验
         RuleFactory.create(CardNumRule.class).checkCardNum(manager);
 
         //开始抢地主
@@ -53,9 +52,9 @@ public class CardApp implements App {
 
     private void roundPlayingCard(PlatformManager manager) throws Exception {
         //地主玩家开始出牌
-        PlayerModel player = manager.getPlayer(ContextHolder.getContext().getDiZhuId());
+        PlayerImpl player = manager.getPlayer(ContextHolder.getContext().getDiZhuId());
         //设置当前出牌玩家
-        PlayerModel currPlayer;
+        PlayerImpl currPlayer;
         while (true) {
             currPlayer = StringUtils.isBlank(ContextHolder.getContext().getCurrId()) ? player : manager.getNextPlayer();
             //打印提示信息
@@ -72,13 +71,13 @@ public class CardApp implements App {
                 break;
             }
             ContextHolder.getContext().setCurrId(currPlayer.getId());
-            //必须放到这里，否则容易清屏多度
+            //clear console
             this.cleanConsole();
         }
         retryGame();
     }
 
-    private void printNoticeInfo(PlatformManager manager, PlayerModel currPlayer) {
+    private void printNoticeInfo(PlatformManager manager, PlayerImpl currPlayer) {
         //预获取下一个玩家,重要
         String currId = ContextHolder.getContext().getCurrId();
         ContextHolder.getContext().setCurrId(currPlayer.getId());
@@ -91,7 +90,7 @@ public class CardApp implements App {
                     " 下一个玩家 {} [{}]",
                     ContextHolder.getContext().getPreId(),
                     ContextHolder.getContext().getPreMark(),
-                    ContextHolder.getContext().getPreGiveCards(),
+                    ContextHolder.getContext().getPrePlayingCards(),
                     manager.getNextPlayer().getId(),
                     manager.getNextPlayer().getMark());
         }
@@ -101,13 +100,13 @@ public class CardApp implements App {
 
     private void grabDiZhu(PlatformManager manager) throws Exception {
         //随机获取一个玩家
-        PlayerModel randomPlayer = manager.getRandomPlayer();
+        PlayerImpl randomPlayer = manager.getRandomPlayer();
         String firstId = randomPlayer.getId();
         randomPlayer.print();
         //设置当前玩家标识
         ContextHolder.getContext().setCurrId(randomPlayer.getId());
         //设置当前玩家
-        PlayerModel currPlayer = null;
+        PlayerImpl currPlayer = null;
         while (true) {
             LOGGER.info("***开始抢地主 命令[yes/no]***");
             Scanner scanner = new Scanner(System.in);
@@ -149,7 +148,7 @@ public class CardApp implements App {
      * @param manager    平台管理器
      * @param currPlayer 玩家
      */
-    private void grabSucc(PlatformManager manager, PlayerModel currPlayer) {
+    private void grabSucc(PlatformManager manager, PlayerImpl currPlayer) {
         LOGGER.info("恭喜你，抢地主成功！");
         ContextHolder.init();
         ContextHolder.getContext().setDiZhuId(currPlayer.getId());

@@ -17,9 +17,9 @@ public class PlatformContext {
      */
     private CardTypeEnum preType;
     /**
-     * 上家打出的牌，空格分隔
+     * 上家打出的牌
      */
-    private String preGiveCards;
+    private String prePlayingCards;
     /**
      * 当前玩家id
      */
@@ -54,12 +54,12 @@ public class PlatformContext {
         this.preType = preType;
     }
 
-    public String getPreGiveCards() {
-        return preGiveCards;
+    public String getPrePlayingCards() {
+        return prePlayingCards;
     }
 
-    public void setPreGiveCards(String preGiveCards) {
-        this.preGiveCards = preGiveCards;
+    public void setPrePlayingCards(String prePlayingCards) {
+        this.prePlayingCards = prePlayingCards;
     }
 
     public String getCurrId() {
