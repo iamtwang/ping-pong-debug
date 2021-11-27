@@ -3,7 +3,7 @@ package com.pingpongdebug.doudizhu.game.manager;
 
 import com.pingpongdebug.doudizhu.game.context.PlatformContext;
 import com.pingpongdebug.doudizhu.game.player.Player;
-import com.pingpongdebug.doudizhu.game.player.PlayerModel;
+import com.pingpongdebug.doudizhu.game.player.PlayerImpl;
 
 public interface Manager {
 
@@ -47,26 +47,26 @@ public interface Manager {
      * @param id 玩家id
      * @return 具体玩家
      */
-    PlayerModel getPlayer(String id);
+    PlayerImpl getPlayer(String id);
 
     /**
      * 获取随机玩家
      *
      * @return 具体玩家
      */
-    PlayerModel getRandomPlayer();
+    PlayerImpl getRandomPlayer();
 
     /**
      * 获取下一个玩家
      *
      * @return 具体玩家
      */
-    PlayerModel getNextPlayer();
+    PlayerImpl getNextPlayer();
 
     /**
      * 获取下一个玩家,只获取一轮
      * @param firstId 从哪个玩家开始算
      * @return 具体玩家
      */
-    PlayerModel getNextPlayerRound(String firstId);
+    PlayerImpl getNextPlayerRound(String firstId);
 }

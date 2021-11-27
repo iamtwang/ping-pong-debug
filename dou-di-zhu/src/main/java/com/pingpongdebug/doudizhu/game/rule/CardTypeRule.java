@@ -3,7 +3,7 @@ package com.pingpongdebug.doudizhu.game.rule;
 
 import com.pingpongdebug.doudizhu.game.constant.CardConst;
 import com.pingpongdebug.doudizhu.game.enums.CardTypeEnum;
-import com.pingpongdebug.doudizhu.game.player.PlayerModel;
+import com.pingpongdebug.doudizhu.game.player.PlayerImpl;
 import com.pingpongdebug.doudizhu.game.utils.CardUtil;
 
 import java.util.*;
@@ -33,7 +33,7 @@ public class CardTypeRule implements Rule {
      * @param cards 打出的牌
      * @return 检查牌的类型
      */
-    public CardTypeEnum checkCardType(String cards, PlayerModel playerModel) {
+    public CardTypeEnum checkCardType(String cards, PlayerImpl playerModel) {
         if (cards == null) {
             return null;
         }

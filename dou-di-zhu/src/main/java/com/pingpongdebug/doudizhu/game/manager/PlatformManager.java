@@ -6,7 +6,7 @@ import com.pingpongdebug.doudizhu.game.constant.CardConst;
 import com.pingpongdebug.doudizhu.game.context.ContextHolder;
 import com.pingpongdebug.doudizhu.game.context.PlatformContext;
 import com.pingpongdebug.doudizhu.game.player.Player;
-import com.pingpongdebug.doudizhu.game.player.PlayerModel;
+import com.pingpongdebug.doudizhu.game.player.PlayerImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,18 +27,15 @@ public class PlatformManager implements Manager {
 
     private Player[] playerArr;
 
-    private Map<String, Player> playerMap;
 
-    public PlatformManager(){
+    private PlatformManager(){
         allCards = new ArrayList<>();
         bottomCards = new ArrayList<>();
-        playerMap = new HashMap<>();
     }
 
     @Override
     public Manager playerInit(Player... players) {
         playerArr =  players;
-        playerMap.putAll(Arrays.stream(players).collect(Collectors.toMap(Player::getId, a -> a)));
         return this;
     }
 
@@ -107,6 +104,7 @@ public class PlatformManager implements Manager {
     public Manager settle(Player player) {
         if (player.getCardNum() == 0) {
             LOGGER.info("Player：{} [ {} ]" + " WIN.", player.getId(), player.getMark() );
+            ContextHolder.remove();
         }
         return this;
     }
@@ -139,8 +137,13 @@ public class PlatformManager implements Manager {
      * @return 具体玩家
      */
     @Override
-    public PlayerModel getPlayer(String id) {
-        return (PlayerModel) this.playerMap.get(id);
+    public PlayerImpl getPlayer(String id) {
+        for(Player player: playerArr){
+            if (id.equalsIgnoreCase(player.getId())) {
+                return (PlayerImpl) player;
+            }
+        }
+        return null;
     }
 
     /**
@@ -149,8 +152,8 @@ public class PlatformManager implements Manager {
      * @return 具体玩家
      */
     @Override
-    public PlayerModel getRandomPlayer() {
-        return (PlayerModel) this.playerArr[(new Random().nextInt(playerArr.length))];
+    public PlayerImpl getRandomPlayer() {
+        return (PlayerImpl) this.playerArr[(new Random().nextInt(playerArr.length))];
     }
 
     /**
@@ -159,38 +162,26 @@ public class PlatformManager implements Manager {
      * @return 下一个具体玩家
      */
     @Override
-    public PlayerModel getNextPlayer() {
-        //当前玩家id
+    public PlayerImpl getNextPlayer() {
+        //current id
         String currId = ContextHolder.getContext().getCurrId();
         if (StringUtils.isBlank(currId)) {
             LOGGER.info("!!没有设置当前玩家id,随机获取一个!!");
             return getRandomPlayer();
         }
-        //下一个玩家id,默认第一个
-        String next = playerArr[0].getId();
+        //Get next player
+        int index = 0;
         for (int i = 0; i < this.playerArr.length - 1; i++) {
             if (this.playerArr[i].getId().equalsIgnoreCase(currId)) {
                 if (i == this.playerArr.length - 1) {
-                    next = playerArr[0].getId();
+                    index = 0;
                 } else {
-                    next = playerArr[i + 1].getId();
+                    index = i +1;
                 }
                 break;
             }
         }
-
-//        int index = 0;
-//        for (int i = 0; i < this.playerArr.length - 1; i++) {
-//            if (this.playerArr[i].getId().equalsIgnoreCase(currId)) {
-//                if (i == this.playerArr.length - 1) {
-//                    index = 0;
-//                } else {
-//                    index = i +1;
-//                }
-//                break;
-//            }
-//        }
-        return getPlayer(next);
+        return (PlayerImpl) playerArr[index];
     }
 
     /**
@@ -200,9 +191,9 @@ public class PlatformManager implements Manager {
      * @return 下一个具体玩家
      */
     @Override
-    public PlayerModel getNextPlayerRound(String firstId) {
+    public PlayerImpl getNextPlayerRound(String firstId) {
         for (; ; ) {
-            PlayerModel nextPlayer = getNextPlayer();
+            PlayerImpl nextPlayer = getNextPlayer();
             if (nextPlayer.getId().equals(firstId)) {
                 return null;
             }
@@ -234,11 +225,4 @@ public class PlatformManager implements Manager {
         this.playerArr = playerArr;
     }
 
-    public Map<String, Player> getPlayerMap() {
-        return playerMap;
-    }
-
-    public void setPlayerMap(Map<String, Player> playerMap) {
-        this.playerMap = playerMap;
-    }
 }
