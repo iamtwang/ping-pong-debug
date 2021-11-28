@@ -16,4 +16,10 @@ public class Command {
      */
     public static final String PASS = "pass";
 
+    public static final String POINT1 = "1";
+
+    public static final String POINT2 = "2";
+
+    public static final String POINT3 = "3";
+
 }

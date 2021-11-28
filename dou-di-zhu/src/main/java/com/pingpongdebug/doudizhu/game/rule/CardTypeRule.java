@@ -70,7 +70,7 @@ public class CardTypeRule implements Rule {
         //三张
         if (cardList.size() == 3) {
             if (this.sameCardNum(cardList, 3)) {
-                return CardTypeEnum.THREE_ONLY;
+                return CardTypeEnum.TRIPLET;
             }
             return null;
         }
@@ -78,7 +78,7 @@ public class CardTypeRule implements Rule {
         if (cardList.size() == 4) {
             //三带一
             if (this.sameCardNum(cardList, 3)) {
-                return CardTypeEnum.THREE_WITH_ONE;
+                return CardTypeEnum.TRIPLET_WITH_ONE;
             }
             //炸弹
             if (this.sameCardNum(cardList, 4)) {
@@ -90,11 +90,11 @@ public class CardTypeRule implements Rule {
         if (cardList.size() == 5) {
             //三带二
             if (this.sameCardNum(cardList, 3) && this.sameCardNum(cardList, 2)) {
-                return CardTypeEnum.THREE_WITH_TWO;
+                return CardTypeEnum.TRIPLET_WITH_TWO;
             }
             //顺子
             if (this.shunZi(cardList)) {
-                return CardTypeEnum.SHUN_ZI;
+                return CardTypeEnum.SEQUENCE;
             }
             return null;
         }
@@ -102,7 +102,7 @@ public class CardTypeRule implements Rule {
         if (cardList.size() > 5) {
             //是否顺子
             if (this.shunZi(cardList)) {
-                return CardTypeEnum.SHUN_ZI;
+                return CardTypeEnum.SEQUENCE;
             }
             //是否连对
             if (this.evenPair(cardList)) {

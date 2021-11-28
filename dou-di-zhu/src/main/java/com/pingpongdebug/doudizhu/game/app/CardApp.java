@@ -43,10 +43,8 @@ public class CardApp implements App {
 
         RuleFactory.create(CardNumRule.class).checkCardNum(manager);
 
-        //开始抢地主
-        grabDiZhu(manager);
+        getLandLord(manager);
 
-        //轮番出牌
         roundPlayingCard(manager);
     }
 
@@ -98,7 +96,7 @@ public class CardApp implements App {
         ContextHolder.getContext().setCurrId(currId);
     }
 
-    private void grabDiZhu(PlatformManager manager) throws Exception {
+    private void getLandLord(PlatformManager manager) throws Exception {
         //随机获取一个玩家
         PlayerImpl randomPlayer = manager.getRandomPlayer();
         String firstId = randomPlayer.getId();
@@ -123,8 +121,8 @@ public class CardApp implements App {
                 break;
             } else {
                 //获取下一个玩家
-                currPlayer = manager.getNextPlayerRound(firstId);
-                if (currPlayer == null) {
+                currPlayer = manager.getNextPlayer();
+                if (currPlayer.getId().equalsIgnoreCase(firstId)) {
                     break;
                 }
 
@@ -219,7 +217,6 @@ public class CardApp implements App {
         System.exit(1);
     }
 
-    @Override
     public void cleanConsole() {
         for (int i = 0; i < 5; i++) {
             LOGGER.info("");

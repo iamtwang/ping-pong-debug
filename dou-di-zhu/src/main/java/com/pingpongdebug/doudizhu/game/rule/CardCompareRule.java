@@ -41,9 +41,9 @@ public class CardCompareRule implements Rule {
         }
         if (context.getPreType() == SINGLE
                 || context.getPreType() == PAIR
-                || context.getPreType() == THREE_ONLY
-                || context.getPreType() == THREE_WITH_ONE
-                || context.getPreType() == THREE_WITH_TWO
+                || context.getPreType() == TRIPLET
+                || context.getPreType() == TRIPLET_WITH_ONE
+                || context.getPreType() == TRIPLET_WITH_TWO
                 || context.getPreType() == PLANE
                 || context.getPreType() == FOUR_WITH_TWO
                 || context.getPreType() == FOUR_WITH_TWO_PAIR) {
@@ -52,7 +52,7 @@ public class CardCompareRule implements Rule {
             }
             return compareOne(context.getPreType(), typeEnum, getSameCard(preList), getSameCard(cardList)) && preList.size() == cardList.size();
         }
-        if (context.getPreType() == SHUN_ZI || context.getPreType() == SEQ_PAIR) {
+        if (context.getPreType() == SEQUENCE || context.getPreType() == SEQ_PAIR) {
             if (typeEnum == CardTypeEnum.BOMB) {
                 return true;
             }

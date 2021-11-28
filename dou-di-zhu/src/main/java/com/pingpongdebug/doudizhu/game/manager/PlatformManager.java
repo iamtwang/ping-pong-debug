@@ -1,7 +1,6 @@
 package com.pingpongdebug.doudizhu.game.manager;
 
 
-
 import com.pingpongdebug.doudizhu.game.constant.CardConst;
 import com.pingpongdebug.doudizhu.game.context.ContextHolder;
 import com.pingpongdebug.doudizhu.game.context.PlatformContext;
@@ -11,8 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 import static com.pingpongdebug.doudizhu.game.constant.CardConst.TOTAL_CARDS;
 import static com.pingpongdebug.doudizhu.game.constant.CardConst.TOTOAL_PLAYER;
@@ -64,7 +65,7 @@ public class PlatformManager implements Manager {
      */
     @Override
     public Manager shuffle() {
-        //Collections.shuffle(allCards);
+        Collections.shuffle(allCards);
         return this;
     }
 
@@ -77,14 +78,11 @@ public class PlatformManager implements Manager {
         }
 
         int lx = getPlayerArr().length;
-//            for (int i = 0; i < allCards.size() - CardConst.BOTTOM_NUM; i++) {
-//                Player player = players[lx++ % players.length];
-//                player.accept(allCards.get(i));
-//            }
+        for (int i = 0; i < allCards.size() - CardConst.BOTTOM_NUM; i++) {
+            Player player = playerArr[lx++ % playerArr.length];
+            player.accept(allCards.get(i));
+        }
 
-        getPlayerArr()[0].accept(Arrays.asList("3", "3", "3", "3", "6", "6", "6", "6", "7", "7", "8", "8", "10", "10", "10", "10", "15"));
-        getPlayerArr()[1].accept(Arrays.asList("4", "4", "4", "4", "5", "5", "5", "5", "7", "7", "8", "8", "9", "9", "9", "9", "15"));
-        getPlayerArr()[2].accept(Arrays.asList("11", "11", "11", "11", "12", "12", "12", "12", "13", "13", "13", "13", "14", "14", "14", "14", "15"));
 
         //将剩余的牌放入底牌
         bottomCards.addAll(allCards.subList(allCards.size() - CardConst.BOTTOM_NUM, allCards.size()));
@@ -182,23 +180,6 @@ public class PlatformManager implements Manager {
             }
         }
         return (PlayerImpl) playerArr[index];
-    }
-
-    /**
-     * 获取下一个玩家，只获取一轮
-     *
-     * @param firstId 从哪个玩家开始算
-     * @return 下一个具体玩家
-     */
-    @Override
-    public PlayerImpl getNextPlayerRound(String firstId) {
-        for (; ; ) {
-            PlayerImpl nextPlayer = getNextPlayer();
-            if (nextPlayer.getId().equals(firstId)) {
-                return null;
-            }
-            return nextPlayer;
-        }
     }
 
     public List<String> getAllCards() {

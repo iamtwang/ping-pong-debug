@@ -6,5 +6,4 @@ public interface App {
 
     void finished();
 
-    void cleanConsole();
 }

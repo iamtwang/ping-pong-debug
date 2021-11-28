@@ -15,19 +15,19 @@ public enum CardTypeEnum {
     /**
      * 三连张
      */
-    THREE_ONLY,
+    TRIPLET,
     /**
      * 三带一
      */
-    THREE_WITH_ONE,
+    TRIPLET_WITH_ONE,
     /**
      * 三带二
      */
-    THREE_WITH_TWO,
+    TRIPLET_WITH_TWO,
     /**
      * 顺子
      */
-    SHUN_ZI,
+    SEQUENCE,
     /**
      * 连对
      */

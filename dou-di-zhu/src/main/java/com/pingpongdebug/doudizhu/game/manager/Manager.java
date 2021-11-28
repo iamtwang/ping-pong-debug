@@ -63,10 +63,4 @@ public interface Manager {
      */
     PlayerImpl getNextPlayer();
 
-    /**
-     * 获取下一个玩家,只获取一轮
-     * @param firstId 从哪个玩家开始算
-     * @return 具体玩家
-     */
-    PlayerImpl getNextPlayerRound(String firstId);
 }
